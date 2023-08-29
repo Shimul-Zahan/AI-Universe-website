@@ -9,8 +9,8 @@ const fetching = async () => {
 
 const displayData = (allData) => {
     const parent = document.getElementById('parent');
-    allData.forEach(data => {
-        console.log(data)
+    allData.forEach((data, index) => {
+        console.log(index)
         const div = document.createElement('div');
         div.classList = `card w-96 bg-base-100 shadow-xl`;
         div.innerHTML = `
@@ -18,7 +18,11 @@ const displayData = (allData) => {
                 <img src="${data.image}" alt="Shoes" class="rounded-xl" />
             </figure>
             <div id="features" class="p-4">
-                <h1 class="text-3xl font-medium">Features</h1>  
+            <h1 class="text-3xl font-medium">Features</h1>
+            <ol>
+            // !add item using join to html element in map function...
+                ${data.features.map((item, index) => `<li>${index + 1}. ${item}</li>`).join('')}
+            </ol>
             </div>
             <div class="items-center text-center p-4">
                 <div class="flex justify-between items-center">
@@ -31,15 +35,7 @@ const displayData = (allData) => {
             </div>
         `;
         parent.appendChild(div);
-        // console.log(data);
     });
-    // const featuresDiv = document.getElementById('features');
-    // let count = 0;
-    // data.features.forEach(feature => {
-    //     const 
-    //         `
-    //     featuresDiv.appendChild(ol);
-    // })
 }
 
 fetching();
