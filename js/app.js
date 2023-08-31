@@ -3,8 +3,17 @@
 const fetching = async () => {
     const fetching = await fetch('https://openapi.programming-hero.com/api/ai/tools');
     const data = await fetching.json();
-    const allData = await data.data.tools
-    displayData(allData);
+    const allData = await data.data.tools;
+    // console.log(allData[0].published_in);
+
+    const sortData = allData.sort(function (a, b) {
+        const date1 = new Date(a.published_in);
+        const date2 = new Date(b.published_in);
+        return date2 - date1;
+    })
+
+    console.log(sortData)
+    displayData(sortData);
 }
 // !add item using join to html element in map function...
 const displayData = (allData) => {
@@ -15,7 +24,7 @@ const displayData = (allData) => {
         div.classList = `card w-96 bg-base-100 shadow-xl`;
         div.innerHTML = `
             <figure class="px-10 pt-10">
-                <img src="${data.image}" alt="Shoes" class="rounded-xl" />
+                <img src="${data.image ? data.image : 'No image found'}" class="rounded-xl" />
             </figure>
             <div id="features" class="p-4">
             <h1 class="text-3xl font-medium">Features</h1>
